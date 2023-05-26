@@ -2,7 +2,7 @@
 
 # Name of the target branch (e.g., main)
 target_branch="main"
-branch_to_merge="three"
+branch_to_merge="one"
 
 # Deploy the changes if the current branch is the target branch
 if [[ "$(git symbolic-ref --short HEAD)" = "$target_branch" ]]; then
