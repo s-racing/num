@@ -10,5 +10,9 @@ is_merged=$(git branch --merged | grep "$branch_name")
 if [ -z "$is_merged" ]; then
   echo "The branch '$branch_name' has not been merged."
 else
-  echo "The branch '$branch_name' has been merged."
+  cd /var/www/html/num
+  sudo rm -f index.html
+  cd /var/lib/jenkins/workspace/new
+  sudo cp -R * /var/www/html/num/
+  
 fi
