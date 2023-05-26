@@ -1,20 +1,14 @@
 #!/bin/bash
 
-# Name of the target branch (e.g., main)
-target_branch="main"
+# Define the branch name to check
+branch_name="one"
 
-# Function to deploy changes to the web page
-deploy_changes() {
-  cd /var/www/html/num
-  sudo rm -f index.html
-  cd /var/lib/jenkins/workspace/new
-  sudo cp -R * /var/www/html/num/
-}
+# Check if the branch has been merged
+is_merged=$(git branch --merged | grep "$branch_name")
 
-# Check if the current branch is the target branch
-if [[ "$(git rev-parse --abbrev-ref HEAD)" = "$target_branch" ]]; then
-  echo "Deploying changes..."
-  deploy_changes
+# Check if the branch has not been merged
+if [ -z "$is_merged" ]; then
+  echo "The branch '$branch_name' has not been merged."
 else
-  echo "Current branch is not '$target_branch'. Changes will not be deployed."
+  echo "The branch '$branch_name' has been merged."
 fi
